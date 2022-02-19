@@ -93,21 +93,23 @@ library(dplyr)
 library(ggplot2)
 
 #save your API key in the object key
-key<-"YourAPIKey"
+key <-"YourAPIKey"
 
 #YouTube channels either have a channel id or a user id
-MrBeastChannelID<-"UCX6OQ3DkcsbYNE6H8uQQuVA" #channel id
+MrBeastChannelID <- "UCX6OQ3DkcsbYNE6H8uQQuVA" #channel id
 PewDiePieUserID <- "PewDiePie" #user id
 #save the base URL in the object base
-base<- "https://www.googleapis.com/youtube/v3/"
+base <- "https://www.googleapis.com/youtube/v3/"
 
 
 #get channel info with channel id for MrBeast channel
-api_params <- 
-  paste(paste0("key=", key), 
-        paste0("id=", MrBeastChannelID), 
-        "part=statistics",
-        sep = "&")
+api_params <- paste(
+  paste0("key=", key), 
+  paste0("id=", MrBeastChannelID), 
+  "part=statistics",
+  sep = "&"
+)
+
 api_call <- paste0(base, "channels", "?", api_params)
 api_result <- GET(api_call)
 json_result <- content(api_result, "text", encoding="UTF-8")
@@ -118,11 +120,13 @@ channel.MB <- as.data.frame(channel.json)
 
 
 #example with a username for PewDiePie channel. For part you can also insert more at once to get additional information.
-api_params2 <- 
-  paste(paste0("key=", key), 
-        paste0("forUsername=", PewDiePieUserID), 
-        "part=snippet,contentDetails,statistics",
-        sep = "&")
+api_params2 <- paste(
+  paste0("key=", key), 
+  paste0("forUsername=", PewDiePieUserID), 
+  "part=snippet,contentDetails,statistics",
+  sep = "&"
+)
+
 api_call2 <- paste0(base, "channels", "?", api_params2)
 api_result2 <- GET(api_call2)
 json_result2 <- content(api_result2, "text", encoding="UTF-8")
@@ -133,10 +137,22 @@ channel.PDP <- as.data.frame(channel.json2)
 
 
 #Now we want to compare the two channels by some indicators like views etc. For this we are subsetting the data and create new indicators like average views per video
-MBchannel <- channel.MB %>% mutate(Channel = "MrBeast",Views= as.numeric(items.statistics.viewCount), Videos = as.numeric(items.statistics.videoCount),averViewsVideo = Views/Videos, Subscriber = as.numeric(items.statistics.subscriberCount)) %>%
+MBchannel <- channel.MB %>%
+  mutate(
+    Channel = "MrBeast",
+    Views= as.numeric(items.statistics.viewCount),
+    Videos = as.numeric(items.statistics.videoCount),
+    averViewsVideo = Views/Videos,
+    Subscriber = as.numeric(items.statistics.subscriberCount)) %>%
   select(Channel,Views,Videos, averViewsVideo, Subscriber)
 
-PDPchannel <- channel.PDP %>% mutate(Channel = "PewDiePie",Views= as.numeric(items.statistics.viewCount), Videos = as.numeric(items.statistics.videoCount),averViewsVideo = Views/Videos, Subscriber = as.numeric(items.statistics.subscriberCount)) %>%
+PDPchannel <- channel.PDP %>%
+  mutate(
+    Channel = "PewDiePie",
+    Views= as.numeric(items.statistics.viewCount),
+    Videos = as.numeric(items.statistics.videoCount),
+    averViewsVideo = Views/Videos,
+    Subscriber = as.numeric(items.statistics.subscriberCount)) %>%
   select(Channel,Views,Videos, averViewsVideo, Subscriber)
 
 YTchannels <- rbind(MBchannel, PDPchannel)
@@ -172,10 +188,12 @@ yt_oauth(app_id = client_id,
 
 #Downloading playlist data
 #first get playlist ID
-go_psych_playlist_id <- stringr::str_split(string = "https://www.youtube.com/playlist?list=PLD4cyJhQaFwWZ838zZhWVr3RG_nETlICM", 
+go_psych_playlist_id <- stringr::str_split(
+  string = "https://www.youtube.com/playlist?list=PLD4cyJhQaFwWZ838zZhWVr3RG_nETlICM", 
   pattern = "=", 
   n = 2,
   simplify = TRUE)[ , 2]
+
 go_psych_playlist_id
 
 #use the tuber function get_playlist_items to collect the videos into a data frame
@@ -208,7 +226,6 @@ go_psych_AllStats
 Package information:  
  * [CRAN - Package tuber](https://cran.r-project.org/web/packages/tuber/index.html)  
  * [here](https://cran.r-project.org/web/packages/tuber/tuber.pdf) you can find all the functions that the tuber package provides
-
 
 
 ## Social science examples

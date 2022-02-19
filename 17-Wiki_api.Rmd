@@ -39,19 +39,28 @@ We include a basic API call to obtain information about the Albert Einstein Wiki
 
 to be plugged into the search bar of a browser to obtain the basic information on the page.
 
-```r
-result:
-{"batchcomplete":"","query":
-  {"pages":
-    {"736":
-      {"pageid":736,"ns":0,"title":"AlbertEinstein",
-      "contentmodel":"wikitext","pagelanguage":"en",
-      "pagelanguagehtmlcode":"en","pagelanguagedir":"ltr",
-      "touched":"2022-02-06T12:46:49Z","lastrevid":1070093046,"length":184850}
+
+Result:
+```json
+{
+  "batchcomplete": "",
+  "query":{
+    "pages": {
+      "736": {
+        "pageid":736,
+        "ns":0,
+        "title":"AlbertEinstein",
+        "contentmodel":"wikitext",
+        "pagelanguage":"en",
+        "pagelanguagehtmlcode":"en",
+        "pagelanguagedir":"ltr",
+        "touched":"2022-02-06T12:46:49Z",
+        "lastrevid":1070093046,
+        "length":184850
+      }
     }
   }
 }
-
 ```
 
 Notice that the first line is common for all calls of the API, while the second line relates to the specific action you are trying to perform.
@@ -98,7 +107,3 @@ data[1:5, 1:4] # for a better overview we are just loooking at the first 5 rows 
 * *Are there social science research examples using the API?*
 
 Some papers using Wikipedia-information rely on the API to access the data. These papers cover a wide range of social and economical sciences. Political science papers are, for example, concerned with political elections, more specifically election prediction [@margolin2016wiki; @salem2021wikipedia]. Other papers use the data accessed through the API to analyze media coverage of the COVID-19 pandemic [@gozzi2020collective] or the interplay between online information and investment markets [@elbahrawy2019wikipedia].
-
-
-
-

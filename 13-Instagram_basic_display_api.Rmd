@@ -65,8 +65,15 @@ appSecret = "b73..."
 redirectUri = "https://mmeierba.github.io/" #example
 code = "AQD..."
 
-id<-POST("https://api.instagram.com/oauth/access_token", 
-     body=list(client_id=appId, client_secret=appSecret, grant_type="authorization_code", redirect_uri=redirectUri, code=code))
+id <- POST(
+  url = "https://api.instagram.com/oauth/access_token", 
+  body = list(
+    client_id = appId,
+    client_secret = appSecret,
+    grant_type="authorization_code",
+    redirect_uri = redirectUri,
+    code = code)
+)
 ```
 
 

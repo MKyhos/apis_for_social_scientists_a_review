@@ -60,14 +60,14 @@ Get Fields and Edges on an IG Media. Fields can be e.g., “caption”, “comme
 Example:
 
 ```{r instagram-graph-4, echo=TRUE, eval=FALSE}
-GET (“https://graph.facebook.com/v10.0/17895695668004550
+GET ("https://graph.facebook.com/v10.0/17895695668004550
       ?fields=id,media_type,media_url,owner,
-      timestamp&access_token=IGQVJ...”)
+      timestamp&access_token=IGQVJ...")
 ```
 
 Response:
 
-```{r instagram-graph-5, echo=TRUE, eval=FALSE}
+```json
 {
   "id": "17895695668004550",
   "media_type": "IMAGE",
@@ -76,14 +76,13 @@ Response:
     "id": "17841405822304914"
   },
   "timestamp": "2017-08-31T18:10:00+0000"
+}
 ```
 
 
-Return Fields and Edges on an IG Hashtag. Field can be the name of the hashtag without the “#” symbol or a hashtag ID. 
+Return Fields and Edges on an IG Hashtag. Field can be the name of the hashtag without the "\#" symbol or a hashtag ID. 
 
-* GET (“https://graph.instagram.com/{ig-hashtag-id}
-?fields={fields}
-&access_token={access-token}”)
+* GET (`"https://graph.instagram.com/{ig-hashtag-id}?fields={fields}&access_token={access-token}"`)
 
 Example:
 
@@ -95,9 +94,11 @@ GET (“https://graph.facebook.com/17841593698074073
 
 Response:
 
-```{r instagram-graph-7, echo=TRUE, eval=FALSE}
-{ "id": "17841593698074073",
-  "name": "coke" }
+```json
+{
+  "id": "17841593698074073",
+  "name": "coke"
+}
 ```
 
 Get fields and edges on an Instagram Business or Creator Account. Fields can be e.g., “biography”, “id”, “followers_count”, or “media_count”.
@@ -113,11 +114,13 @@ GET (“https://graph.facebook.com/v3.2/17841405822304914
 
 Response:
 
-```{r instagram-graph-9, echo=TRUE, eval=FALSE}
-{  "biography": "Dino data crunching app",
+```json
+{
+  "biography": "Dino data crunching app",
   "id": "17841405822304914",
   "username": "metricsaurus",
-  "website": "http://www.metricsaurus.com/" }
+  "website": "http://www.metricsaurus.com/"
+}
 ```
 
 ## API access
