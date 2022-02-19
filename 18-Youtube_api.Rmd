@@ -3,7 +3,7 @@
 <chauthors>Melike Kaplan, Jana Klein, Dean Lajic</chauthors>
 <br><br>
 ```{r youtube-1, include=FALSE} 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE)
 # setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
 ```
 

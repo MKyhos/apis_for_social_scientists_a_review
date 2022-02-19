@@ -252,7 +252,7 @@ fb_ad_list <- readRDS("figures/rds/facebook_ads_uk_housing.RDS")
 
 ```{r facebook-4}
 # The demographic & region datasets are in the "long" format (multiple
-# rows of information for each ad), and we need a transformation to a "wide" 
+# rows of information for each ad), and we need a transformation to a "wide"
 # format (single row per ad) of the ad dataset using the tidyr package.
 
 fb_ad_list[["demographic"]] <- pivot_wider(fb_ad_list[["demographic"]],
@@ -285,10 +285,10 @@ For instance, in our case, we get UK regions columns and all of the US states to
 As a final part of this exploration, let's create some summary statistics on UK housing ads from the first week of November 2021, using a few selected variables in our sample.
 
 ```{r facebook-5}
-# Using the dataset containing combined ads, demographic and region data, we 
+# Using the dataset containing combined ads, demographic and region data, we
 # select only ads from the first week of November 2021, group by Facebook pages,
 # which paid for more than one add during this period. For these observations,
-# we create summary statistics on selected variables. 
+# we create summary statistics on selected variables.
 merged_dataset %>%
   filter(ad_delivery_start_time >= "2021-11-01" &
     ad_delivery_start_time <= "2021-11-07") %>%

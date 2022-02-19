@@ -4,7 +4,7 @@
 <br><br>
 
 ```{r google-trends-1, include=FALSE} 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE)
 # setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
 ```
 
@@ -55,8 +55,8 @@ Example using [“httr” package](https://cran.r-project.org/web/packages/httr/
 ```{r google-trends-3, echo=TRUE, eval=FALSE}
 library(httr)
 GET("https://trends.google.com/trends/explore",
-	query=list(q = "Covid",geo = "US"))
-
+  query = list(q = "Covid", geo = "US")
+)
 ```
 * but just html-output, we recommend to use the gtrendsR package
 <br />
@@ -65,18 +65,18 @@ Example using [“gtrendsR” package](https://cran.r-project.org/web/packages/g
 
 
 ```{r google-trends-4, echo=TRUE, warning=FALSE}
-# visualizing google searches for the word "corona symptoms" in 
+# visualizing google searches for the word "corona symptoms" in
 # Germany and Austria in the period 01/01/2020 - 27/04/2021
 library(gtrendsR)
 library(ggplot2)
 library(dplyr)
 
-data("countries") # get abbreviations of all countries to filter data 
-data("categories") # get numbers of all categories to filter data 
+data("countries") # get abbreviations of all countries to filter data
+data("categories") # get numbers of all categories to filter data
 
 # Simple call
 
-res <- gtrends("corona symptome",geo=c("DE", "AT"))
+res <- gtrends("corona symptome", geo = c("DE", "AT"))
 plot(res)
 ```
 
@@ -84,20 +84,25 @@ plot(res)
 * Note (2): the use of the pattern '"xyz"' in the keyword argument of the gtrends function corresponds to the inverted commas in the table above, all other punctuation methods in the table above can be used as indicated in the table.
 
 ```{r google-trends-5, warning=FALSE}
-#Combination using dplyr and ggplot
-trend = gtrends(keyword="corona symptome", geo=c("DE", "AT"), time = "2020-01-01 2021-04-27", gprop="web") 
+# Combination using dplyr and ggplot
+trend <- gtrends(
+  keyword = "corona symptome",
+  geo = c("DE", "AT"),
+  time = "2020-01-01 2021-04-27",
+  gprop = "web"
+)
 
 trend_df <- trend$interest_over_time
 
 trend_df <- trend_df %>%
-	mutate(hits = as.numeric(hits), date = as.Date(date)) %>%
-	replace(is.na(.), 0)
+  mutate(hits = as.numeric(hits), date = as.Date(date)) %>%
+  replace(is.na(.), 0)
 
-ggplot(trend_df, aes(x=date, y=hits, group=geo, col=geo)) + geom_line(size=2) +
-scale_x_date(date_breaks = "2 months" , date_labels = "%b-%y") +
-labs(color= "Countries") +
-ggtitle("Frequencies for the query -corona symptoms- in the period: 01/01/2020 - 27/04/2021")
-
+ggplot(trend_df, aes(x = date, y = hits, group = geo, col = geo)) +
+  geom_line(size = 2) +
+  scale_x_date(date_breaks = "2 months", date_labels = "%b-%y") +
+  labs(color = "Countries") +
+  ggtitle("Frequencies for the query -corona symptoms- in the period: 01/01/2020 - 27/04/2021")
 ```
 
 

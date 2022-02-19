@@ -3,8 +3,8 @@
 <chauthors>Lukas Isermann and Clara Husson</chauthors>
 <br><br>
 
-```{r google-places-1, include=FALSE} 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+```{r google-places-1, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE)
 # setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
 ```
 
@@ -27,8 +27,7 @@ The following five requests are available: Place Search, Place Details, Place Ph
 * *What are the prerequisites to access the API (authentication)? *
 
 
-The prerequisites to access Google Places API are a Google Cloud project (to create it you need a Google account to log into the Google Cloud Platform) and an API Key. Before creating your API Key, don’t forget to enable Places API! To create your API key, go the APIs & Services > Credentials > API key page. 
-
+The prerequisites to access Google Places API are a Google Cloud project (to create it you need a Google account to log into the Google Cloud Platform) and an API Key. Before creating your API Key, don’t forget to enable Places API! To create your API key, go the APIs & Services > Credentials > API key page.
 
 
 ## Simple API call
@@ -38,13 +37,13 @@ The API provides different searches and services that can be accessed via HTTP U
 
 https://maps.googleapis.com/maps/api/place/service/output?parameters
 
-Here, service can take the inputs findplacefromtext for find place requests, nearbysearch to look for nearby places, details for a request of place details and more. output may take the value json or xml, dependent on the requested output format. 
+Here, service can take the inputs findplacefromtext for find place requests, nearbysearch to look for nearby places, details for a request of place details and more. output may take the value json or xml, dependent on the requested output format.
 
-Furthermore, certain parameters are required for all requests. Most importantly, every request must entail a key parameter, indicating the API key. Second, all search places requests take an input parameter that identifies the search target and an inputtype parameter that identifies the type of input given in the input parameter. For place requests, the inputtype parameter can take the values textquery and phonenumber. 
+Furthermore, certain parameters are required for all requests. Most importantly, every request must entail a key parameter, indicating the API key. Second, all search places requests take an input parameter that identifies the search target and an inputtype parameter that identifies the type of input given in the input parameter. For place requests, the inputtype parameter can take the values textquery and phonenumber.
 
-Nearby requests take a location parameter setting longitude and latitude of the requested place as well as a radius parameter. Detail request, however, take a mandatory parameter place_id, which indicates the place for which the details are requested. 
+Nearby requests take a location parameter setting longitude and latitude of the requested place as well as a radius parameter. Detail request, however, take a mandatory parameter place_id, which indicates the place for which the details are requested.
 
-Additionally, different optional parameters can be used. These entail a language parameter, a fields parameter indicating the types of place data to return and more. 
+Additionally, different optional parameters can be used. These entail a language parameter, a fields parameter indicating the types of place data to return and more.
 
 
 An examples for an API request for pizza places in Mannheim can look like this:
@@ -56,7 +55,7 @@ https://maps.googleapis.com/maps/api/place/textsearch/xml?query=pizza&location=4
 
 
 ## API access
-* *How can we access the API from R (httr + other packages)?* 
+* *How can we access the API from R (httr + other packages)?*
 
 Instead of typing the API request into our browser, we can use the httr package’s GET function to access the API from R.
 
@@ -68,14 +67,15 @@ library(httr)
 
 key <- "YOURAPIKEY"
 
-res<-GET("https://maps.googleapis.com/maps/api/place/textsearch/json?", query = list(
-           query = "pizza",
-           location = "49.487459,8.466039",
-           radius = 5000,
-           key = key
-         ))
-
-
+res <- GET(
+  url = "https://maps.googleapis.com/maps/api/place/textsearch/json?",
+  query = list(
+    query = "pizza",
+    location = "49.487459,8.466039",
+    radius = 5000,
+    key = key
+  )
+)
 ```
 
 Alternatively, we can use a wrapper function for R provided by the R-Package googleway.
@@ -124,7 +124,7 @@ location <- c(location$location$lat, location$location$lng)
 # Plot places to google map
 library(mapsapi)
 # for this you will also need to activate the "maps static API"
-r = mapsapi::mp_map(center = ("49.48746,8.466039"), zoom = 14, key = key, quiet = TRUE)
+r <- mapsapi::mp_map(center = ("49.48746,8.466039"), zoom = 14, key = key, quiet = TRUE)
 library(stars)
 
 plot(r)
@@ -155,24 +155,26 @@ pizza <- readRDS("figures/rds/google_places_pizza.RDS")
 pizza$results %>%
   ggplot() +
   geom_col(aes(x = reorder(name, rating), y = rating)) +
-  geom_text(aes(x = reorder(name, rating), y = rating),
-                label = paste0(pizza$results$user_ratings_total, " \n ratings"), size = 2) +
-  ylab("Average Rating")+
+  geom_text(
+    mapping = aes(x = reorder(name, rating), y = rating),
+    label = paste0(pizza$results$user_ratings_total, " \n ratings"),
+    size = 2
+  ) +
+  ylab("Average Rating") +
   xlab("") +
   ggtitle("Pizza Places in Mannheim by Rating") +
   theme_minimal() +
   theme(
-    axis.text.x = element_text(angle = 90, size = 8, hjust=0.95,vjust=0.2))
-
-
+    axis.text.x = element_text(angle = 90, size = 8, hjust = 0.95, vjust = 0.2)
+  )
 ```
 
 ```{r google-places-14, echo=T, eval=F, warning=F, message=F}
 # Plot pizza places to google map
-#important: in order to display the map correctly, you will also have to enable the Maps JavaScript API on GCP
-# unfortunately we can not display an intercative card in this document, but check out the below code in your own rmd-file! 
+# important: in order to display the map correctly, you will also have to enable the Maps JavaScript API on GCP
+# unfortunately we can not display an intercative card in this document, but check out the below code in your own rmd-file!
 
-map<-googleway::google_map(location = location)
+map <- googleway::google_map(location = location)
 googleway::add_markers(map, data = pizza$results$geometry$location)
 ```
 

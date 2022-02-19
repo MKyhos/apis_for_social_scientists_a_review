@@ -3,8 +3,8 @@
 <chauthors>Markus Konrad (Wissenschaftszentrum Berlin für Sozialforschung – WZB)</chauthors>
 <br><br>
 
-```{r genderize-1, include=FALSE} 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+```{r genderize-1, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE)
 ```
 
 You will need to install the following packages for this chapter (run the code):
@@ -49,7 +49,7 @@ At the time of writing, the API can be queried with up to 1000 names per day for
 The API is very simple and basically accepts two parameters for an HTTP GET request:
 
 1. `name` as the given name for which gender prediction is performed; an array of up to 10 names per request can be send
-2. `country_id` as optional localization parameter (given as [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code) 
+2. `country_id` as optional localization parameter (given as [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code)
 
 When no `country_id` is given, the gender prediction is performed using a database of given names for *all* countries with a notable bias towards Western countries (see the numbers on the ["Our Data" page](https://genderize.io/our-data)). If country information is known, you should provide it in the API request, as this gives more accurate, context-aware results. Especially if you're working with names outside the Western cultural sphere, you should be aware of the Western bias in the datasets used for the predictions and make use of the localization feature.
 
@@ -135,42 +135,47 @@ library(DemografixeR)
 The main function to use is the `genderize` function. The first argument is the one or more names (as character string vector) for which you want to predict the gender. So to replicate the first API call from the previous section in R, we could write:
 
 ```{r genderize-11}
-genderize('sasha')
+genderize("sasha")
 ```
 
 Note that the output only consists of the gender prediction as character string vector. This is a dangerous default behavior, as it omits important information about the prediction probability and the size of the data pool used for the prediction. We need to set the `simplify` argument to `FALSE` in order to get that information in the form of a dataframe:
 
 ```{r genderize-12}
-genderize('sasha', simplify = FALSE)
+genderize("sasha", simplify = FALSE)
 ```
 
 Again, we can localize the request by using the `country_id` parameter:
 
 ```{r genderize-13}
-genderize('sascha', country_id = 'DE', simplify = FALSE)
+genderize("sascha", country_id = "DE", simplify = FALSE)
 ```
 
 Supplying a character string vector will predict the gender of all these names. Note that with the `genderize` function, you're not limited to ten names as when using the API directly. Here, we predict the gender of six names in their original and Latinized variant each. This also shows the higher counts when using only Latin characters in the query:
 
 ```{r genderize-14}
-genderize(c('gül', 'gul', 'jürgen', 'jurgen', 'andré', 'andre',
-            'gökçe', 'gokce', 'jörg', 'jorg', 'rené', 'rene'),
-          simplify = FALSE)
+genderize(c(
+  "gül", "gul", "jürgen", "jurgen", "andré", "andre",
+  "gökçe", "gokce", "jörg", "jorg", "rené", "rene"
+  ),
+  simplify = FALSE
+)
 ```
 
 You can also provide a different `country_id` for each name in the request:
 
 ```{r genderize-15}
-genderize(c('sasha', 'sascha'), country_id = c('RU', 'DE'), simplify = FALSE)
+genderize(c("sasha", "sascha"), country_id = c("RU", "DE"), simplify = FALSE)
 ```
 
 This is especially helpful together with `expand.grid`, which generates all combinations of values in the two vectors:
 
 ```{r genderize-16}
-names <- c('sasha', 'sascha')
-countries <- c('RU', 'DE')
-(names_cntrs <- expand.grid(names = names, countries = countries,
-                            stringsAsFactors = FALSE))
+names <- c("sasha", "sascha")
+countries <- c("RU", "DE")
+(names_cntrs <- expand.grid(
+  names = names, countries = countries,
+  stringsAsFactors = FALSE
+))
 ```
 
 ```{r genderize-17}
@@ -180,7 +185,7 @@ genderize(names_cntrs$names, country_id = names_cntrs$countries, simplify = FALS
 Lastly, you can set the parameter `meta` to `TRUE`. This will add additional columns to the result with your rate limit (maximum daily number of requests), the remaining number of requests, the seconds until rate limit reset and the time of the request:
 
 ```{r genderize-18}
-genderize('judy', simplify = FALSE, meta = TRUE)
+genderize("judy", simplify = FALSE, meta = TRUE)
 ```
 
 ### Provide API key

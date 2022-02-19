@@ -3,7 +3,7 @@
 <br><br>
 
 ```{r mediacloud-1, include=FALSE} 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE)
 ```
 
 You will need to install the following packages for this chapter (run the code):
@@ -156,7 +156,9 @@ unima_dfm
 And then standard operations can be done.
 
 ```{r mediacloud-8}
-unima_dfm %>% dfm_tfidf() %>% topfeatures(n = 20)
+unima_dfm %>%
+  dfm_tfidf() %>%
+  topfeatures(n = 20)
 ```
 
 The faculties of *BWL* (Business Administration) and *Jura* (Law) would be happy with this finding.

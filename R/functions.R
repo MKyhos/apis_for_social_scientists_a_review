@@ -28,8 +28,9 @@ find_used_packages <- function(scope) {
 print_used_packages <- function(packages) {
   packages <- sprintf("\"%s\"", packages)
   wrapped <- character()
-  for (i in seq_len(ceiling(length(packages) / 3)))
+  for (i in seq_len(ceiling(length(packages) / 3))) {
     wrapped[i] <- toString(packages[(i * 3 - 2):min((i * 3), length(packages))])
+  }
 
   wrapped <- paste(wrapped, collapse = ",\n\t")
   wrapped <- paste0("\t", wrapped)

@@ -4,7 +4,7 @@
 <br><br>
 
 ```{r wikipedia-1, include=FALSE} 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE)
 ```
 
 You will need to install the following packages for this chapter (run the code):
@@ -66,10 +66,10 @@ WikipediR allows us to get different information like general page info, backlin
 ```{r wikipedia-3, echo=TRUE, warning =FALSE}
 library(WikipediR)
 
-all_bls <- page_backlinks("en","wikipedia", page = "Albert Einstein", limit = 10) #using "page_backlings" function of the WikipediR package
+all_bls <- page_backlinks("en", "wikipedia", page = "Albert Einstein", limit = 10) # using "page_backlings" function of the WikipediR package
 bls_title <- data.frame()
-for(i in 1:10){
-  bls_title <- rbind(bls_title,all_bls$query$backlinks[[i]]$title)
+for (i in 1:10) {
+  bls_title <- rbind(bls_title, all_bls$query$backlinks[[i]]$title)
 }
 colnames(bls_title) <- "backlinks"
 bls_title
@@ -84,14 +84,14 @@ library(xml2)
 url <- "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population"
 html <- read_html(url) # reading the html code into memory
 
-#with the commands of the rvest package we are able to scrape the information we need, here html_table()
+# with the commands of the rvest package we are able to scrape the information we need, here html_table()
 
-tab <- html_table(html, fill=TRUE) # shows all tables on the website with the number of the table in double brackets [[number]]
+tab <- html_table(html, fill = TRUE) # shows all tables on the website with the number of the table in double brackets [[number]]
 
-#we are interested in table 1, the inequality index of the countries 
+# we are interested in table 1, the inequality index of the countries
 data <- tab[[1]]
-data <- data[-1,] # delete first row
-data[1:5,1:4] #for a better overview we are just loooking at the first 5 rows and the first 4 columns
+data <- data[-1, ] # delete first row
+data[1:5, 1:4] # for a better overview we are just loooking at the first 5 rows and the first 4 columns
 ```
 
 ## Social science examples

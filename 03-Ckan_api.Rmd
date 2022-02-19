@@ -4,7 +4,7 @@
 <br><br>
 
 ```{r ckan-1, include=FALSE} 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE)
 # setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
 ```
 
@@ -75,7 +75,7 @@ library(httr) # required to work with the API
 # With the following query we get the same information as described in the paragraph above
 
 base_url <- "https://www.govdata.de/ckan/api/3/action/resource_show"
-berlin <- GET(base_url, query=list(q="kinder",rows=5))
+berlin <- GET(base_url, query = list(q = "kinder", rows = 5))
 ``` 
 
 ```{r ckan-4, warning=FALSE, eval=FALSE}
@@ -88,7 +88,7 @@ library(jsonlite)
 library(readxl)
 library(curl)
 
-#connect to the website
+# connect to the website
 url_site <- "https://www.govdata.de/ckan"
 ckanr_setup(url = url_site)
 
@@ -96,8 +96,8 @@ ckanr_setup(url = url_site)
 group_list(as = "table")
 
 
-#you can see there are different groups
-#now we want to look at them in more detail
+# you can see there are different groups
+# now we want to look at them in more detail
 group_list(limit = 2)
 
 # now you can look for the specific packages
@@ -115,7 +115,7 @@ x$results
 # now we want to have a closer look at the second resource (day care for children)
 # we need to get the url, by using the resource number
 
-url<-resource_show(id ="a8413550-bf4d-40f3-921a-941da3fce132")
+url <- resource_show(id = "a8413550-bf4d-40f3-921a-941da3fce132")
 url$url
 
 # with the url, we can now import the data

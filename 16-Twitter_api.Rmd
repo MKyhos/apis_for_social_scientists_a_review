@@ -3,7 +3,7 @@
 <br><br>
 
 ```{r twitter-1, include=FALSE} 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE)
 ```
 
 You will need to install the following packages for this chapter (run the code):
@@ -121,10 +121,14 @@ The daily time series of number of German tweets tweets is displayed in Figure b
 
 ```{r twitter-5, fff_day}
 lockdown_date <- as.POSIXct(as.Date("2020-03-23"))
-fff_ts %>% mutate(start = ymd_hms(start)) %>% select(start, tweet_count) %>%
-  ggplot(aes(x = start, y = tweet_count)) + geom_line() +
+fff_ts %>%
+  mutate(start = ymd_hms(start)) %>%
+  select(start, tweet_count) %>%
+  ggplot(aes(x = start, y = tweet_count)) +
+  geom_line() +
   geom_vline(xintercept = lockdown_date, color = "red", lty = 2) +
-  xlab("Date") + ylab("Number of German #fridaysforfuture tweets")
+  xlab("Date") +
+  ylab("Number of German #fridaysforfuture tweets")
 ```
 
 ## Social science examples
