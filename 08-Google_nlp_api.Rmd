@@ -95,7 +95,6 @@ beforehand also translated to english)
 
 ```{r google-nlp-6, message=FALSE, warning=FALSE}
 library(googleLanguageR)
-library(tidyverse)
 library(tm)#stopwords
 ```
 

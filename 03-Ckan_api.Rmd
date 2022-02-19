@@ -82,7 +82,6 @@ berlin <- GET(base_url, query = list(q = "kinder", rows = 5))
 # Option 2: Use the ckanr package to access the API
 
 # load relevant packages
-library(tidyverse)
 library(ckanr)
 library(jsonlite)
 library(readxl)

@@ -159,7 +159,6 @@ After setting up the consent screen you can go back and click “create credenti
 
 ```r
 library(tuber) # youtube API
-library(tidyverse) # all tidyverse packages
 library(purrr) # package for iterating/extracting data
 
 #save client id and secret in an object

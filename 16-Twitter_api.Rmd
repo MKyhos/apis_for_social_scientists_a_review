@@ -97,7 +97,6 @@ The package `academictwitteR` [@barrie:2021] can be used to access the Academic 
 
 ```r
 library(academictwitteR)
-library(tidyverse)
 library(lubridate)
 fff_ts <- count_all_tweets(query = "#fridaysforfuture lang:DE",
                            start_tweets = "2019-06-01T00:00:00Z",
