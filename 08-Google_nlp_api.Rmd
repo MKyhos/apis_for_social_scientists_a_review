@@ -128,9 +128,9 @@ text <- guardian_corpus[["documents"]][["texts"]]
 # For demonstration purposes, subset the text data to 20 observations only
 text <- text[1:20]
 
-# Turn text into a data frame and add an identifier
-df <- as.data.frame(text)
-df <- tibble::rowid_to_column(df, "ID")
+# Turn text into a data frame (tibble) and add an identifier
+df <- as_tibble(text)
+df <- rowid_to_column(df, "ID")
 ```
 
 ```{r, google-nlp-10, echo = FALSE, message = FALSE}

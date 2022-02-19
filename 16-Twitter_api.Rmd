@@ -108,8 +108,8 @@ head(fff_ts) # the data is in reverse chronological order
 ```
 
 ```{r twitter-3, echo = FALSE, message = FALSE}
-library(tidyverse)
 library(lubridate)
+library(dplyr)
 fff_ts <- readRDS("figures/rds/twitter_ffs_ts.RDS")
 ```
 

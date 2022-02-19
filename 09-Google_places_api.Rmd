@@ -93,7 +93,6 @@ set_key(key)
 
 ```{r google-places-5, message=FALSE, warning=FALSE}
 library(ggplot2)
-library(tidyverse)
 library(googleway)
 ```
 

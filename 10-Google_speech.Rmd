@@ -95,7 +95,6 @@ For the usage of further arguments, also read the `gl_speech()` [documentation](
 *1. Load packages*
 
 ```{r google-speech-5, message=FALSE, warning=FALSE}
-library(tidyverse)
 library(googleLanguageR)
 ```
 
