@@ -11,7 +11,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
 You will need to install the following packages for this chapter (run the code):
 
 ```{r google-speech-2, echo=FALSE, comment=NA}
-print_used_packages(find_used_packages("10-Google_speech.Rmd"))
+print_used_packages(find_used_packages("Google_speech"))
 ```
 
 ## Provided services/data

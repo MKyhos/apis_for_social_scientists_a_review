@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 You will need to install the following packages for this chapter (run the code):
 
 ```{r google-news-2, echo=FALSE, comment=NA}
-print_used_packages(find_used_packages("07-Google_news_api.Rmd"))
+print_used_packages(find_used_packages("Google_news_api"))
 ```
 
 With the News API (formerly Google News API), you can get article snippets and news headlines, both up to four years old and real-time, from over 80,000 news sources worldwide.

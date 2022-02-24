@@ -10,7 +10,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
 You will need to install the following packages for this chapter (run the code):
 
 ```{r google-translation-2, echo=FALSE, comment=NA}
-print_used_packages(find_used_packages("11-Google_translation_api.Rmd"))
+print_used_packages(find_used_packages("Google_translation_api"))
 ```
 
 ## Provided services/data

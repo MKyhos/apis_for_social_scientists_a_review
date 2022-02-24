@@ -11,7 +11,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 You will need to install the following packages for this chapter (run the code):
 
 ```{r crowdTangle-2, echo=FALSE, comment=NA}
-print_used_packages(find_used_packages("04-CrowdTangle_API.Rmd"))
+print_used_packages(find_used_packages("Crowdtangle_api"))
 ```
 
 CrowdTangle is a public insights tool, whose main intent was to monitor what content overperformed in terms of interactions (likes, shares, etc.) on Facebook and other social media platforms. In 2016, CrowdTangle was acquired by Facebook that now provides the service.
