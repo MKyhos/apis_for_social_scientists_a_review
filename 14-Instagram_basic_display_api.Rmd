@@ -3,7 +3,7 @@
 <chauthors>Madleen Meier-Barthold</chauthors>
 <br><br>
 
-```{r instagram-basic-display-1, cache-ch-genderize, include=FALSE} 
+```{r instagram-basic-display-1, cache-ch-genderize, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
 ```
 
@@ -13,7 +13,7 @@ You will need to install the following packages for this chapter (run the code):
 print_used_packages(find_used_packages("13-Instagram_basic_display_api.Rmd"))
 ```
 
-Initially released in 2010, Instagram currently counts 1+ billion monthly active users with 50+ billion photos stored (@Tankovska_undated-ph). User engagement is high, with an average of 28 minutes per day spent on the platform in 2020 (@Aslam2021-fp). Needless to say, the photo and video sharing social networking service holds invaluable data that could be leveraged by social researchers. 
+Initially released in 2010, Instagram currently counts 1+ billion monthly active users with 50+ billion photos stored (@Tankovska_undated-ph). User engagement is high, with an average of 28 minutes per day spent on the platform in 2020 (@Aslam2021-fp). Needless to say, the photo and video sharing social networking service holds invaluable data that could be leveraged by social researchers.
 
 ## Provided services/data
 * *What data/service is provided by the API?*
@@ -24,14 +24,14 @@ Previously, other APIs were available which allowed developers and researchers a
 
 The Instagram Basic Display API gives read-access to basic profile information, photos and videos on authenticated users’ accounts (@Facebook_for_Developers2021-mn). Particularly, it is possible to fetch a user’s profile, including fields like account type and account name, as well as a user’s media (images, videos and albums), including fields like media type, caption, URL and timestamp. The API does not allow to modify data like publishing media or moderating comments (see Instagram Graph API).
 
-It is a RESTful API, meaning that queries are made for static information at the current moment. Queries are subject to rate limits. Responses are in the form of JSON-formatted objects containing the default and requested fields and edges. 
+It is a RESTful API, meaning that queries are made for static information at the current moment. Queries are subject to rate limits. Responses are in the form of JSON-formatted objects containing the default and requested fields and edges.
 
-## Prerequesites
+## Prerequisites
 * *What are the prerequisites to access the API (authentication)? *
 
-In order to access the Instagram Basic Display API, developers are required to first register as a Facebook developer on [developers.facebook.com]("https://developers.facebook.com/), to further create a Facebook App [here]("https://developers.facebook.com/docs/instagram-basic-display-api/getting-started") and to submit the application for review. 
+In order to access the Instagram Basic Display API, developers are required to first register as a Facebook developer on [developers.facebook.com]("https://developers.facebook.com/), to further create a Facebook App [here]("https://developers.facebook.com/docs/instagram-basic-display-api/getting-started") and to submit the application for review.
 
-Another prerequisite to access the API is to get authentication. API authentication is handled through Instagram User Access Tokens that conform to the OAuth 2.0 protocol. The process of getting an access token includes two parts. First, each application user must grant an application permission to read the user node and/or the media node. These permissions are controlled via an Authorization Window. 
+Another prerequisite to access the API is to get authentication. API authentication is handled through Instagram User Access Tokens that conform to the OAuth 2.0 protocol. The process of getting an access token includes two parts. First, each application user must grant an application permission to read the user node and/or the media node. These permissions are controlled via an Authorization Window.
 
 ```{r instagram-basic-display-3, eval=F, echo=T}
 https://api.instagram.com/oauth/authorize
@@ -43,11 +43,11 @@ https://api.instagram.com/oauth/authorize
 
 Give this URL to the application users. The next steps have to be completed by each user.
 
-1. Open a new browser window and load the Authorization Window URL. 
+1. Open a new browser window and load the Authorization Window URL.
 
 2. Authenticate your Instagram test user by signing into the Authorization Window
 
-3. Click Authorize to grant your app access to your profile data. 
+3. Click Authorize to grant your app access to your profile data.
 
 4. Upon success, the page will redirect you to the redirect URI you included in the previous step and append an Authorization Code. For example: https://mmeierba.github.io/?code=AQD...#_
 
@@ -61,12 +61,12 @@ Then, the API can be queried.
 library(httr)
 
 appId = "126..." #use Instagram App ID and secret (not Facebook App)
-appSecret = "b73..." 
+appSecret = "b73..."
 redirectUri = "https://mmeierba.github.io/" #example
 code = "AQD..."
 
 id <- POST(
-  url = "https://api.instagram.com/oauth/access_token", 
+  url = "https://api.instagram.com/oauth/access_token",
   body = list(
     client_id = appId,
     client_secret = appSecret,
@@ -90,7 +90,7 @@ accessToken = "..."
 userId = "..."
 
 ## Query the user node
-GET("https://graph.instagram.com/userId?fields=id,username&access_token=accessToken") 
+GET("https://graph.instagram.com/userId?fields=id,username&access_token=accessToken")
 GET("https://graph.instagram.com/me?fields=id,username&access_token=accessToken") #alternative
 
 
@@ -104,20 +104,20 @@ GET("https://graph.instagram.com/mediaId?fields=id,media_type,media_url,username
 ```
 
 ## API access
-* *How can we access the API from R (httr + other packages)?* 
+* *How can we access the API from R (httr + other packages)?*
 
-The Instagram Graphic Display API can be accessed from R using the httr package. 
+The Instagram Graphic Display API can be accessed from R using the httr package.
 
-Current R packages specific to APIs from Instagram (e.g., instaR) are related to deprecated versions of Instagram APIs and are therefore no longer useful in the current version (@Instagram2021-ii). To the knowledge of the authors, there are no R packages specific to the Instagram Basic Display API. 
+Current R packages specific to APIs from Instagram (e.g., instaR) are related to deprecated versions of Instagram APIs and are therefore no longer useful in the current version (@Instagram2021-ii). To the knowledge of the authors, there are no R packages specific to the Instagram Basic Display API.
 
 * *Are there social science research examples using the API?*
 
 There are a couple of examples of studies in the field of social science that have used an Instagram API. However, the presented examples use older, depreciated versions of the Instagram API.
 
-@Hu2014-br collected 50 user profiles and their most recent photos, as well as users’ lists of friends and followers using the Instagram API. Analyzing the data, the authors identified a range of photo categories and types of Instagram users. 
+@Hu2014-br collected 50 user profiles and their most recent photos, as well as users’ lists of friends and followers using the Instagram API. Analyzing the data, the authors identified a range of photo categories and types of Instagram users.
 
-@Ferwerda2015-db used the Instagram API to extract Instagram pictures from survey participants, who had previously filled in a personality questionnaire. 113 survey participants granted the researchers access to their Instagram accounts through the API. The authors found that distinct features of the Instagram pictures (i.e., hue, brightness, saturation) associated with users’ personality traits. 
+@Ferwerda2015-db used the Instagram API to extract Instagram pictures from survey participants, who had previously filled in a personality questionnaire. 113 survey participants granted the researchers access to their Instagram accounts through the API. The authors found that distinct features of the Instagram pictures (i.e., hue, brightness, saturation) associated with users’ personality traits.
 
-These examples show the potential that extracting data using the Instagram Basic Display API has for social science researchers. Yet, a lot of data are not yet being leveraged (e.g., captions). 
+These examples show the potential that extracting data using the Instagram Basic Display API has for social science researchers. Yet, a lot of data are not yet being leveraged (e.g., captions).
 
 

@@ -3,7 +3,7 @@
 <chauthors>Noam Himmelrath, Jacopo Gambato</chauthors>
 <br><br>
 
-```{r wikipedia-1, include=FALSE} 
+```{r wikipedia-1, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE)
 ```
 
@@ -21,17 +21,17 @@ To access *Wikipedia*, *MediaWiki* provides the MediaWiki Action API.
 The API can be used for multiple things, such as accessing wiki features, interacting with a wiki and obtaining meta-information about wikis and public users. Additionally, the web service can provide access data and post changes of *Wikipedia*-webpages.
 
 
-## Prerequesites
+## Prerequisites
 * *What are the prerequisites to access the API (authentication)? *
 
-No pre-registration is required to access the API. However, for certain actions, such as very large queries, a registration is required. Moreover, while there is no hard and fast limit on read requests, the system administrators heavily recommend limiting the request rate to secure the stability of the side. It is also best practice to set a descriptive User Agent header. 
+No pre-registration is required to access the API. However, for certain actions, such as very large queries, a registration is required. Moreover, while there is no hard and fast limit on read requests, the system administrators heavily recommend limiting the request rate to secure the stability of the side. It is also best practice to set a descriptive User Agent header.
 
 
 
 ## Simple API call
 * *What does a simple API call look like?*
 
-As mentioned, the API can be used to communicate with Wikipedia for a variety of actions. As it is most likely for social scientist to extract information rather than post changes to a Wikipedia page, we focus here on obtaining from Wikipedia the information we need. 
+As mentioned, the API can be used to communicate with Wikipedia for a variety of actions. As it is most likely for social scientist to extract information rather than post changes to a Wikipedia page, we focus here on obtaining from Wikipedia the information we need.
 
 We include a basic API call to obtain information about the Albert Einstein Wikipedia page
 
@@ -66,7 +66,7 @@ Result:
 Notice that the first line is common for all calls of the API, while the second line relates to the specific action you are trying to perform.
 
 ## API access
-* *How can we access the API from R (httr + other packages)?* 
+* *How can we access the API from R (httr + other packages)?*
 
 The most common tool is [WikipediR](https://cran.r-project.org/web/packages/WikipediR/WikipediR.pdf), a wrapper around the Wikipedia API. It allows `R` to access information and "directions" for the relevant page or pages of Wikipedia and the content or metadata therein. Importantly, the wrapper only allows to gather information, which implies that the instrument needs to be accompanied by other packages such as `rvest` for scraping and `XML` or `jsonlite` for parsing.
 

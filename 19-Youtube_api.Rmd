@@ -2,7 +2,7 @@
 # Youtube API
 <chauthors>Melike Kaplan, Jana Klein, Dean Lajic</chauthors>
 <br><br>
-```{r youtube-1, include=FALSE} 
+```{r youtube-1, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE)
 # setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
 ```
@@ -29,7 +29,7 @@ There are different types of Youtube APIs that serve different purposes:
 The [google developer site](https://developers.google.com/youtube/v3/sample_requests) provides sample requests and a summary of the possible metrics that the API can give you data on. You can actually run your API requests there. All the possible calls you can make are provided on the page: Captions, ChannelBanners, Channels, ChannelSection, Comments, CommentThreads, i18nLanguages, i18nRegrions, Members, MembershipLevels, Playlistitems, Playlists, Search, Subscriptions, Thumbnails, VideoAbuseReportReasons, VideoCategories, and Videos.
 
 
-## Prerequesites
+## Prerequisites
 * *What are the prerequisites to access the API (authentication)? *
 
 An overview and guide is given on the [Youtube Api website](https://developers.google.com/youtube/v3/getting-started).
@@ -50,8 +50,8 @@ Your key is created! It is important to restrict the key!
 You can access the API via your browser. The [Youtube API website](https://developers.google.com/youtube/v3/docs/search/list) facilitate this where you have just to insert your parameters like part (what kind of information) or q (your search query). There is also an overview of that parameters on the [Youtube Api website](https://developers.google.com/youtube/v3/getting-started).
 
 The base URL is https://www.googleapis.com/youtube/v3/.
-With the following API call we tried to get the channel statistics from the MrBeast youtube channel. The channel statistics include information on  the viewer count, subscriber count, whether there are hidden subscribers and on the video count.  
-https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=UCX6OQ3DkcsbYNE6H8uQQuVA&key=[YourAPIKey]  
+With the following API call we tried to get the channel statistics from the MrBeast youtube channel. The channel statistics include information on  the viewer count, subscriber count, whether there are hidden subscribers and on the video count.
+https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=UCX6OQ3DkcsbYNE6H8uQQuVA&key=[YourAPIKey]
 Here we are looking for channels, "part" is set on statistics and the id is the Youtube channel id. Inserted in the Browser we will get the following output.
 
 ```r
@@ -79,7 +79,7 @@ Here we are looking for channels, "part" is set on statistics and the id is the 
 ```
 
 ## API access
-* *How can we access the API from R (httr + other packages)?* 
+* *How can we access the API from R (httr + other packages)?*
 
 To access the API from R we are using the same logic by building URL´s with our search request and using the "GET" function of the [httr package](https://cran.r-project.org/web/packages/httr/index.html).
 In this example we will compare the channel statistics of the the two biggest youtuber´s, PewDiePie and MrBeast.
@@ -104,8 +104,8 @@ base <- "https://www.googleapis.com/youtube/v3/"
 
 #get channel info with channel id for MrBeast channel
 api_params <- paste(
-  paste0("key=", key), 
-  paste0("id=", MrBeastChannelID), 
+  paste0("key=", key),
+  paste0("id=", MrBeastChannelID),
   "part=statistics",
   sep = "&"
 )
@@ -121,8 +121,8 @@ channel.MB <- as.data.frame(channel.json)
 
 #example with a username for PewDiePie channel. For part you can also insert more at once to get additional information.
 api_params2 <- paste(
-  paste0("key=", key), 
-  paste0("forUsername=", PewDiePieUserID), 
+  paste0("key=", key),
+  paste0("forUsername=", PewDiePieUserID),
   "part=snippet,contentDetails,statistics",
   sep = "&"
 )
@@ -165,10 +165,10 @@ YTchannels
 
 On CRAN we found the [“tuber” package](https://cran.r-project.org/web/packages/tuber/index.html). The package enables you to get the comments posted on YouTube videos, number of likes of a video, search for videos with specific content and much more. You can also scrape captions from a few videos. To be able to use the tuber package, not an API key but the authentication with OAuth is necessary. OAuth (Open Authorization) uses authorization tokens to prove an identity between consumers and service providers. You can get your client ID and secret on the Google Cloud Platform under Credentials.
 
-1) Setting up the “Consent Screen”  
+1) Setting up the “Consent Screen”
 First we had to configure the so-called OAuth consent screen, where we put “external” and then had to put an app name. For scopes we did not specify anything and just clicked save & continued. To be able to use the API you have to set your own google mail address that you use for the Google cloud.
 
-2) Get OAuth credentials  
+2) Get OAuth credentials
 After setting up the consent screen you can go back and click “create credentials” and add a “OAuth client ID”. In older guides it is recommended to choose the category "others" which no longer exists. Here you have to choose "desktop application". As a result you get an OAuth client id and secret. You can download this information stored in a JSON file. With the Yt_oauth function you can then authenticate yourself. This will forward us to logging into our google account. Allow the access to your google account. (like with google bigquery).
 
 [This page](https://www.storybench.org/how-to-download-youtube-data-in-r-using-tuber-and-purrr/) provides some example API calls you can make with the tuber package.
@@ -181,7 +181,7 @@ library(purrr) # package for iterating/extracting data
 client_id<-"put client ID"
 client_secret<-"put client secret"
 
-# use the youtube oauth 
+# use the youtube oauth
 yt_oauth(app_id = client_id,
          app_secret = client_secret,
          token = '')
@@ -189,27 +189,27 @@ yt_oauth(app_id = client_id,
 #Downloading playlist data
 #first get playlist ID
 go_psych_playlist_id <- stringr::str_split(
-  string = "https://www.youtube.com/playlist?list=PLD4cyJhQaFwWZ838zZhWVr3RG_nETlICM", 
-  pattern = "=", 
+  string = "https://www.youtube.com/playlist?list=PLD4cyJhQaFwWZ838zZhWVr3RG_nETlICM",
+  pattern = "=",
   n = 2,
   simplify = TRUE)[ , 2]
 
 go_psych_playlist_id
 
 #use the tuber function get_playlist_items to collect the videos into a data frame
-go_psych <- get_playlist_items(filter = c(playlist_id = "PLD4cyJhQaFwWZ838zZhWVr3RG_nETlICM"), 
-                                      part = "contentDetails") 
+go_psych <- get_playlist_items(filter = c(playlist_id = "PLD4cyJhQaFwWZ838zZhWVr3RG_nETlICM"),
+                                      part = "contentDetails")
 
 
 ##now we have the video ids of all videos in that playlist
-#extracting video id´s 
+#extracting video id´s
 go_psych_ids <- (go_psych$contentDetails.videoId)
 
 #In the next step we will use the map_df command of the purrr package which needs a function as a parameter
-#creating a function using the get_stats function of the tuber package 
+#creating a function using the get_stats function of the tuber package
 get_all_stats <- function(id) {
   get_stats(video_id = id)
-} 
+}
 
 # Now we can store the stats information in a data frame with the map_df command which needs an object .x and a function .f
 go_psych_AllStats <- map_df(.x = go_psych_ids, .f = get_all_stats)
@@ -223,16 +223,16 @@ go_psych_AllStats
 ```
 
 
-Package information:  
- * [CRAN - Package tuber](https://cran.r-project.org/web/packages/tuber/index.html)  
+Package information:
+ * [CRAN - Package tuber](https://cran.r-project.org/web/packages/tuber/index.html)
  * [here](https://cran.r-project.org/web/packages/tuber/tuber.pdf) you can find all the functions that the tuber package provides
 
 
 ## Social science examples
 * *Are there social science research examples using the API?*
 
-In the study “Identifying Toxicity Within YouTube Video Comment” (@Obadimu2019), the researchers utilized the YouTube Data API to collect the comments from eight YouTube channels that were either pro- or anti NATO. To the comments, five types of toxicity scores were assigned to analyze hateful comments. With word clouds the researchers were able to quantify the count of words from comments. The final dataset contained 1,424 pro-NATO videos with 8,276 comments, and 3,461 anti-NATO videos with 46,464 comments.  
+In the study “Identifying Toxicity Within YouTube Video Comment” (@Obadimu2019), the researchers utilized the YouTube Data API to collect the comments from eight YouTube channels that were either pro- or anti NATO. To the comments, five types of toxicity scores were assigned to analyze hateful comments. With word clouds the researchers were able to quantify the count of words from comments. The final dataset contained 1,424 pro-NATO videos with 8,276 comments, and 3,461 anti-NATO videos with 46,464 comments.
 
-The aim of the study “YouTube channels, uploads and views: A statistical analysis of the past 10 years” (@Baertl2018) was to give an overview on how YouTube developed over the past 10 years in terms of consumption and production of videos. The study utilizes a random sample of channel and video data to answer the question. The data is retrieved with the YouTube API (did not specify which one) combined with a tool that generated random string searches to find a near-random sample of channels created between 01.01.2016 and 31.12.2016. Results are that channels, views and video uploads differ according to video genre. Furthermore, the analysis revealed that the majority of views are obtained by only a few channels. On average, older channels have a larger amount of viewers.   
+The aim of the study “YouTube channels, uploads and views: A statistical analysis of the past 10 years” (@Baertl2018) was to give an overview on how YouTube developed over the past 10 years in terms of consumption and production of videos. The study utilizes a random sample of channel and video data to answer the question. The data is retrieved with the YouTube API (did not specify which one) combined with a tool that generated random string searches to find a near-random sample of channels created between 01.01.2016 and 31.12.2016. Results are that channels, views and video uploads differ according to video genre. Furthermore, the analysis revealed that the majority of views are obtained by only a few channels. On average, older channels have a larger amount of viewers.
 
-In the study “From ranking algorithms to ‘ranking cultures’: Investigating the modulation of visibility in YouTube search results” (@Rieder2018), YouTube is conceptualized as an influential source of information that uses a socio-algorithmic process in order to place search recommendations in a hierarchy. This process of ranking is considered to be a construction of relevance and knowledge in a very large pool of information. Therefore, the search function serves as a curator of recommended content. The information that is being transmitted in this content can also impose certain perspectives on users which is why how the algorithm works is especially important when it comes to controversial issues. In order to better understand how the algorithms that determine search rankings on YouTube work, the authors use a scraping approach and the YouTube API v3 to study the ranking of certain sociocultural issues over time. Examples of the keywords that they use are ‘gamergate,’ ‘trump,’ ‘refugees’ and ‘syria.’ They find three general types of morphologies of rank change.  
+In the study “From ranking algorithms to ‘ranking cultures’: Investigating the modulation of visibility in YouTube search results” (@Rieder2018), YouTube is conceptualized as an influential source of information that uses a socio-algorithmic process in order to place search recommendations in a hierarchy. This process of ranking is considered to be a construction of relevance and knowledge in a very large pool of information. Therefore, the search function serves as a curator of recommended content. The information that is being transmitted in this content can also impose certain perspectives on users which is why how the algorithm works is especially important when it comes to controversial issues. In order to better understand how the algorithms that determine search rankings on YouTube work, the authors use a scraping approach and the YouTube API v3 to study the ranking of certain sociocultural issues over time. Examples of the keywords that they use are ‘gamergate,’ ‘trump,’ ‘refugees’ and ‘syria.’ They find three general types of morphologies of rank change.

@@ -3,11 +3,9 @@
 <chauthors>Lion Behrens and Pirmin Stöckle</chauthors>
 <br><br>
 
-```{r crowdTangle-1, include=FALSE} 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE)
-# setting cache to TRUE here allows that single API calls do not have to be run
-# every time when knitting index or the single script, but only when something
-# has been changed in index or single script
+```{r crowdTangle-1, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+# setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
 ```
 
 You will need to install the following packages for this chapter (run the code):
@@ -47,7 +45,7 @@ CrowdTangle’s database is updated once every fifteen minutes and comes as time
 When connecting to the user interface via the CrowdTangle website, the user can either manually set up a list of pages of interest whose data should be acquired. Alternatively, one can choose from an extensive number of pre-prepared lists covering a variety of topics, regions, or socially and politically relevant events such as inaugurations and elections. Data can be downloaded from the user interface as csv files or as json files via the API.
 
 
-## Prerequesites
+## Prerequisites
 * *What are the prerequisites to access the API (authentication)? *
 
 
@@ -91,7 +89,7 @@ The respective API call looks like that:
 [https://api.crowdtangle.com/posts?token=token&listIds=listIDs&sortBy=total_interactions&startDate=2021-01-01&count=10]("https://api.crowdtangle.com/posts?token=token&listIds=listIDs&sortBy=total_interactions&startDate=2021-01-01&count=10"]), where token is the personal API key, and listIDs is the ID of the list created with the user interface. Here, we sortBy total interactions with the startDate at the beginning of this year and the output restricted to count 10 posts.
 
 ## API access
-* *How can we access the API from R (httr + other packages)?* 
+* *How can we access the API from R (httr + other packages)?*
 
 Instead of typing the API request into our browser, we can use the httr package’s GET function to access the API from R.
 

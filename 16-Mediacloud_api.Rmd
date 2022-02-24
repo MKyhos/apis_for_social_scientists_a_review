@@ -2,7 +2,7 @@
 <chauthors>Chung-hong Chan</chauthors>
 <br><br>
 
-```{r mediacloud-1, include=FALSE} 
+```{r mediacloud-1, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE)
 ```
 
@@ -16,7 +16,7 @@ print_used_packages(find_used_packages("15-Mediacloud_api.Rmd"))
 
 * *What data/service is provided by the API?*
 
-According to [the official FAQ](https://mediacloud.org/support/), Media Cloud is "an open source and open data platform for storing, retrieving, visualizing, and analyzing online news." It is a consortium project across multiple institutions, including the University of Massachusetts Amherst, Northeastern University, and the Berkman Klein Center for Internet & Society at Harvard University. The full technical information about the project and the data provided are available in @roberts2021media. In short, the system continuously crawls RSS and similar feeds from a large collection of media sources (as of writing: > 25,000 media sources). Based on this large corpus of media contents, the system provides three services: Topic Mapper, Media Explorer, and Source Manager. 
+According to [the official FAQ](https://mediacloud.org/support/), Media Cloud is "an open source and open data platform for storing, retrieving, visualizing, and analyzing online news." It is a consortium project across multiple institutions, including the University of Massachusetts Amherst, Northeastern University, and the Berkman Klein Center for Internet & Society at Harvard University. The full technical information about the project and the data provided are available in @roberts2021media. In short, the system continuously crawls RSS and similar feeds from a large collection of media sources (as of writing: > 25,000 media sources). Based on this large corpus of media contents, the system provides three services: Topic Mapper, Media Explorer, and Source Manager.
 
 The services are accessible through the web interface and csv export is also supported from there. For programmatic access, Media Cloud also provides several [APIs](https://github.com/mediacloud/backend/tree/master/doc/api_2_0_spec). I will focus on the [main v2.0 API](https://github.com/mediacloud/backend/blob/master/doc/api_2_0_spec/api_2_0_spec.md), because it is currently the only public API.
 
@@ -43,7 +43,7 @@ The most important end points are:
 
 It is also important to learn about how to [write a solr query](https://mediacloud.org/getting-started-guide). It is used in either `q` ("query") and `fq` ("filter query") of many end point requests. For example, to search for stories with both "mannheim" and "university" in the New York Times (media_id = 1), the solr query should be: `text:mannheim+AND+text:university+AND+media_id:1`.
 
-In this example, we are going to search for 20 stories in the New York Times (Media ID: 1) mentioning "mannheim AND university". 
+In this example, we are going to search for 20 stories in the New York Times (Media ID: 1) mentioning "mannheim AND university".
 
 ```r
 library(httr)
@@ -59,7 +59,7 @@ content(res)
 ```
 
 ## API access
-* *How can we access the API from R (httr + other packages)?* 
+* *How can we access the API from R (httr + other packages)?*
 
 As of writing, there are (at least) four R packages for accessing the Media Cloud API. Although the `mediacloudr` package by Dix Jan is available on CRAN, I recommend using the `mediacloud` package by Julian Unkel (LMU). It is available on Dr Unkel's [Github](https://github.com/joon-e/mediacloud). By default, the package always returns "tidy" objects. The package can be installed by:
 

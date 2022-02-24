@@ -1,6 +1,6 @@
 # Genderize.io API
 
-<chauthors>Markus Konrad (Wissenschaftszentrum Berlin für Sozialforschung – WZB)</chauthors>
+<chauthors>Markus Konrad (WZB)</chauthors>
 <br><br>
 
 ```{r genderize-1, include=FALSE}
@@ -37,7 +37,7 @@ For gender prediction, there are also alternatives to using this API:
 - WikiPedia provides [categories for given names](https://en.wikipedia.org/wiki/Category:Given_names) by gender
 
 
-## Prerequesites
+## Prerequisites
 
 At the time of writing, the API can be queried with up to 1000 names per day for free. There's not even an API key required for the free tier. However, if you require more than 1000 API requests per day, you need to obtain an API key from [store.genderize.io](https://store.genderize.io/) – see [this page](https://store.genderize.io/pricing) for pricing.
 
@@ -58,7 +58,6 @@ We can perform a sample request using the `curl` command in a terminal or by sim
 ```{bash genderize-3, eval=FALSE}
 curl 'https://api.genderize.io?name=sasha'
 ```
-
 
 The result is an HTTP response with JSON formatted data which contains the predicted gender, the prediction probability estimate and the count of entries which informed the prediction. For the example requests above, the API responds with:
 

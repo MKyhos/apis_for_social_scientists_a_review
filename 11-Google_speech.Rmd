@@ -3,7 +3,7 @@
 <chauthors>Camille Landesvatter</chauthors>
 <br><br>
 
-```{r google-speech-1, include=FALSE} 
+```{r google-speech-1, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
 # setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
 ```
@@ -27,7 +27,7 @@ A demo of the API that allows you to record text via your microphone (or to uplo
 Also consider that there is a [Text-to-Speech API]("https://cloud.google.com/text-to-speech") - simply performing operations the other way around - offered by Google.
 
 
-## Prerequesites
+## Prerequisites
 * *What are the prerequisites to access the API (authentication)? *
 
 To access and to use the API the following steps are necessary:
@@ -38,7 +38,7 @@ To access and to use the API the following steps are necessary:
 
 - Within this Google Cloud Project enable the Google Speech-to-text API.
 
-- For authentication you will need to create an API key (which you additionally should restrict to the Translation API). If however, you are planning to request the Natural Language API from outside a Google Cloud environment (e.g., R) you will be required to use a private (service account) key. This can be achieved by creating a service account which in turn will allow you to download your private key as a JSON file (we show an example below). 
+- For authentication you will need to create an API key (which you additionally should restrict to the Translation API). If however, you are planning to request the Natural Language API from outside a Google Cloud environment (e.g., R) you will be required to use a private (service account) key. This can be achieved by creating a service account which in turn will allow you to download your private key as a JSON file (we show an example below).
 
 
 ## Simple API call
@@ -78,7 +78,7 @@ curl "https://speech.googleapis.com/v1p1beta1/speech:recognize?key=APIKEY" -s -X
 
 
 ## API access
-* *How can we access the API from R (httr + other packages)?* 
+* *How can we access the API from R (httr + other packages)?*
 
 Example using R-Package [‘googleLanguageR’]("https://cran.r-project.org/web/packages/googleLanguageR/index.html")
 
@@ -152,7 +152,7 @@ exemplary_audio_analysis$transcript$confidence #0.92
 ## Social science examples
 * *Are there social science research examples using the API?*
 
-Similar to our note on social science research examples for Google’s Translation API, we are not aware of research that made explicit usage of Google's Speech-to-text API. 
+Similar to our note on social science research examples for Google’s Translation API, we are not aware of research that made explicit usage of Google's Speech-to-text API.
 However, and especially in combination with the Translation API, we are convinced that speech-to-text conversion can be of great advantage for all kinds of qualitative or mixed-methods research projects.
 
 

@@ -3,7 +3,7 @@
 <chauthors>Philipp Kadel</chauthors>
 <br><br>
 
-```{r instagram-graph-1, include=FALSE} 
+```{r instagram-graph-1, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
 ```
 
@@ -37,7 +37,7 @@ Likewise, there are several metrics about stories that are provided by the API:
 * Replies	 – Total number of replies to the story.
 * Taps_forward – Total number of taps to see this story’s next photo or video.
 
-## Prerequesites
+## Prerequisites
 * *What are the prerequisites to access the API (authentication)? *
 
 For most endpoints you need an Instagram Business Account, a Facebook Page that is connected to that account, a Facebook Developer Account and a Facebook App with Basic settings configured. Facebook provides a tutorial for setting this up [here]("https://developers.facebook.com/docs/instagram-api/getting-started").
@@ -80,7 +80,7 @@ Response:
 ```
 
 
-Return Fields and Edges on an IG Hashtag. Field can be the name of the hashtag without the "\#" symbol or a hashtag ID. 
+Return Fields and Edges on an IG Hashtag. Field can be the name of the hashtag without the "\#" symbol or a hashtag ID.
 
 * GET (`"https://graph.instagram.com/{ig-hashtag-id}?fields={fields}&access_token={access-token}"`)
 
@@ -124,7 +124,7 @@ Response:
 ```
 
 ## API access
-* *How can we access the API from R (httr + other packages)?* 
+* *How can we access the API from R (httr + other packages)?*
 
 The `httr` package can be used to access the Instagram Graph API. There used to be a `instaR` package but it was made for the old Instagram API and can not be used anymore. The [`FBinsightsR`]("https://rdrr.io/github/Deducive/FBinsightsR/") package provides access to the Insights API. Its `fbins_insta` function can be used to collect Instagram insights. Detailed information on the packages' functions can be found [here]("https://github.com/Deducive/FBinsightsR/blob/master/R/functions.R") and more information on the deprecated `instaR` package [here]("https://stackoverflow.com/questions/54488186/instagram-api-in-r-deprecated-need-to-use-graph-facebook-com").
 
