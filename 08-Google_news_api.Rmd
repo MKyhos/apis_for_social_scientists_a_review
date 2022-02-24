@@ -84,11 +84,7 @@ sources <- httr::GET(
 )
 
 sources_df <- bind_rows(content(sources)$sources)
-<<<<<<< HEAD:07-Google_news_api.Rmd
-save(sources_df, file = "google_news-sources.RData")
-=======
 sources_df[,c("id", "name", "url", "category")]
->>>>>>> main:08-Google_news_api.Rmd
 ```
 
 ```{r google-news-5, echo = FALSE}
@@ -115,16 +111,11 @@ headlines <- httr::GET(
   query = params
 )
 
-<<<<<<< HEAD:07-Google_news_api.Rmd
-headlines_df <- bind_rows(content(headlines)$articles) %>%
+headlines_df <- content(headlines)$articles %>%
+  bind_rows() %>%
   mutate(source = tolower(source)) %>%
   unique()
-save(headlines_df, file = "google_new-headlines.RData")
-=======
-headlines_df <- bind_rows(content(headlines)$articles) %>%
-  mutate(source = tolower(source)) %>% unique()
 headlines_df[,c("publishedAt","title")]
->>>>>>> main:08-Google_news_api.Rmd
 ```
 
 ```{r google-news-7, echo = FALSE}
